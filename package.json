@@ -1,0 +1,45 @@
+{
+  "name": "m3u-parser-generator-validated",
+  "version": "1.3.0",
+  "description": "Library to parse and generate m3u or m3u8 IPTV playlist files",
+  "keywords": [
+    "m3u",
+    "m3u8",
+    "m3u parser",
+    "m3u generator",
+    "iptv"
+  ],
+  "repository": "https://github.com/Raiper34/m3u-parser-generator-validated",
+  "homepage": "https://m3u-parser-generator.netlify.app",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx tsc && browserify dist/index.js -o dist/browser-bundle.js -s m3uParserGenerator && uglifyjs dist/browser-bundle.js -o dist/browser-bundle.min.js",
+    "start": "npm run build & node dist/main.js",
+    "test": "nyc -r lcov jasmine-ts --config=jasmine.json",
+    "test:ci": "nyc -r lcov jasmine-ts --config=jasmine.json && cat ./coverage/lcov.info | coveralls",
+    "lint": "npx eslint ./src",
+    "lint:fix": "npx eslint ./src --fix",
+    "docs": "npx typedoc src/index.ts",
+    "deploy": "npm run docs && netlify deploy --dir=docs --prod",
+    "publish": "npm run build && npm publish"
+  },
+  "author": "Raiper34",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^3.6.6",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "browserify": "^17.0.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.23.0",
+    "jasmine": "^3.6.4",
+    "jasmine-ts": "^0.4.0",
+    "netlify-cli": "^10.5.0",
+    "nyc": "^15.1.0",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.23.15",
+    "typescript": "^4.8.3",
+    "uglify-js": "^3.17.0"
+  }
+}
